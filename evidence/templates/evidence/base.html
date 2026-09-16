@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{% static 'evidence/css/style.css' %}">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">{% translate "Skip to content" %}</a>
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="wordmark" href="{% url 'home' %}">
@@ -41,7 +42,7 @@
     </div>
   {% endif %}
 
-  <main class="wrap">
+  <main id="main-content" class="wrap">
     {% block content %}{% endblock %}
   </main>
 

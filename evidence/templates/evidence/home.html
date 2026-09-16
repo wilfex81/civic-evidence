@@ -7,6 +7,7 @@
   <p class="intro__lede">
     {% blocktranslate count counter=total_projects %}Search {{ counter }} record to see the official status alongside what the community has reported on the ground.{% plural %}Search {{ counter }} records to see the official status alongside what the community has reported on the ground.{% endblocktranslate %}
   </p>
+  <p class="intro__persona">{% translate "For a resident checking whether a promised public project is working in their community." %}</p>
 </section>
 
 <form class="search" method="get" action="{% url 'home' %}">

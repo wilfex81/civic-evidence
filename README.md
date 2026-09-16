@@ -20,30 +20,58 @@ the gap between information and evidence.
 Civic Evidence & Verification creates a structured evidence layer
 around civic projects and public services:
 
-- **Official record** — what an institution has stated (status, date,
+- **Official record** - what an institution has stated (status, date,
   source).
-- **Community observations** — what people report experiencing on the
+- **Community observations** - what people report experiencing on the
   ground, each with a date and a stated form of supporting evidence.
-- **Evidence status** — a plain verdict computed from the two:
+- **Evidence status** - a plain verdict computed from the two:
   aligned, conflicting, stale, or not yet evidenced.
 
 The system does not decide what is true. It makes the available
 evidence, and any disagreement in it, visible.
 
+The primary user is a resident checking whether a promised public project
+is working in their community. Journalists and watchdog groups can use the
+same record to compare official claims with recent, attributable reports.
+
 ## How it works
 
-1. **Find** — search or browse civic projects.
-2. **Understand** — view the official status, location, responsible
+1. **Find** - search or browse civic projects.
+2. **Understand** - view the official status, location, responsible
    organization, and source.
-3. **Compare** — review recent community observations and their
+3. **Compare** - review recent community observations and their
    evidence.
-4. **See the verdict** — aligned, conflicting, stale, or no evidence
+4. **See the verdict** - aligned, conflicting, stale, or no evidence
    yet.
-5. **Contribute** — submit a new observation.
+5. **Contribute** - submit a new observation.
+
+Every verdict includes a clear next step. Conflicting records invite another
+observation, stale records ask someone to update them, and aligned records
+show that recent reports support the official status. Recent verdicts also
+show how many distinct reporters contributed, so one anonymous report is not
+presented as equivalent to several independent reports.
+
+## Design decisions
+
+- **Low bandwidth** - the interface is server-rendered HTML with no frontend
+  framework, large media, or required JavaScript. Pages remain usable on a
+  basic connection and on small screens.
+- **Accessibility** - pages use semantic headings, labelled form controls,
+  keyboard-visible focus states, a skip link, and text labels alongside
+  status colors.
+- **Privacy** - observation submission requires no account and defaults to an
+  anonymous report. The prototype does not collect device or location data.
+- **Multilingual access** - the interface supports English and Kiswahili via
+  Django's translation system. Short, structured UI messages keep future
+  translation manageable; seeded project facts remain in their source
+  language so names and official statements are not silently altered.
+- **Local relevance** - the demonstration records use civic projects and
+  public services in Kenya, with locations, institutions, and reporting
+  language that match the intended context.
 
 ## Evidence status logic
 
-The verdict is deliberately simple and fully inspectable — see
+The verdict is deliberately simple and fully inspectable - see
 `evidence/models.py`, `Project.evidence_status()`.
 
 | Condition | Verdict |
@@ -91,17 +119,17 @@ civic-evidence/
 
 ## Data model
 
-**Project** — the official record.
+**Project** - the official record.
 `name`, `slug`, `summary`, `location`, `responsible_organization`,
 `official_status` (completed / ongoing / planned / stalled),
 `official_status_date`, `source_name`, `source_url`, `is_demo_data`.
 
-**Observation** — a community report, linked to a Project.
+**Observation** - a community report, linked to a Project.
 `date_observed`, `status` (operational / not_operational / in_progress
 / no_activity / other), `description`, `evidence_type` (photo / video
 / document / testimony), `evidence_note`, `submitted_by`.
 
-The prototype does not require file uploads — evidence is recorded as
+The prototype does not require file uploads - evidence is recorded as
 a typed claim (`evidence_type` + `evidence_note`) rather than an
 attached file, which is enough to demonstrate the workflow.
 
@@ -120,11 +148,11 @@ python manage.py runserver
 Visit `http://127.0.0.1:8000/`. Four seeded projects demonstrate all
 four evidence-status outcomes:
 
-- **Kimumu Water Project** — conflicting evidence (observations
+- **Kimumu Water Project** - conflicting evidence (observations
   disagree on whether water is flowing).
-- **Eldoret Central Market Renovation** — aligned evidence.
-- **Iten-Kaptagat Road Resurfacing** — no recent evidence (stale).
-- **Uasin Gishu Youth Innovation Hub** — no evidence yet.
+- **Eldoret Central Market Renovation** - aligned evidence.
+- **Iten-Kaptagat Road Resurfacing** - no recent evidence (stale).
+- **Uasin Gishu Youth Innovation Hub** - no evidence yet.
 
 To reset and reseed: `python manage.py seed_data --flush`.
 
@@ -141,23 +169,23 @@ submission._
 
 - All project and observation records are seeded demonstration data,
   not verified government records. This is stated on every page.
-- Observation submission is open and unauthenticated — anyone can
-  submit an observation under any name, including "Anonymous". There
-  is no verification of who submitted a report or whether it is
-  accurate. A real deployment would need identity or trust signals
-  before observations could be treated as reliable.
+- Observation submission is open and unauthenticated - anyone can submit an
+  observation under any name, including "Anonymous". Reporter counts are a
+  transparency signal, not proof of identity or accuracy. A real deployment
+  would need identity or trust signals before observations could be treated
+  as reliable.
 - Evidence is recorded as a typed claim, not an uploaded file. There
   is no image or document upload, and no way to verify that stated
   evidence actually exists.
 - The 30-day recency window and the official-status-to-observation
   mapping are fixed constants, not configurable per project type.
-- No real government data integration. No search across sources
-  beyond name and location matching.
+- No real government data integration. No search across sources beyond name
+  and location matching.
 
 ## Future development
 
 - Verified government data integrations.
-- Multilingual and low-bandwidth interfaces.
+- More interface languages and translated versions of official project facts.
 - Trusted-organization verification for observations.
 - Geographic analysis and mapping.
 - Automated document ingestion.
@@ -165,8 +193,8 @@ submission._
 
 ## Use of AI tools
 
-AI-assisted development tools were used for coding support,
-debugging, documentation, and iteration. The proof of concept does
-not use an LLM as a source of truth or as the decision-maker for the
-evidence verdict — that logic is explicit, fixed, and inspectable in
-`evidence/models.py`.
+The evidence-layer concept and core capstone idea are original to this
+project. AI-assisted development tools were used for coding support,
+debugging, documentation, and iteration. The proof of concept does not use
+an LLM as a source of truth or as the decision-maker for the evidence verdict
+- that logic is explicit, fixed, and inspectable in `evidence/models.py`.

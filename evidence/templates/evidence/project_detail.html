@@ -1,7 +1,7 @@
 {% extends "evidence/base.html" %}
 {% load i18n %}
 
-{% block title %}{{ project.name }} — {% translate "Civic Evidence & Verification" %}{% endblock %}
+{% block title %}{{ project.name }} - {% translate "Civic Evidence & Verification" %}{% endblock %}
 
 {% block content %}
 <a class="back-link" href="{% url 'home' %}">&larr; {% translate "All records" %}</a>
@@ -14,6 +14,12 @@
 <section class="verdict verdict--{{ evidence.key }}">
   <p class="verdict__label">{{ evidence.label }}</p>
   <p class="verdict__detail">{{ evidence.detail }}</p>
+  {% if evidence.reporter_count %}
+    <p class="verdict__reporters">
+      {% blocktranslate count counter=evidence.reporter_count %}Based on {{ counter }} independent reporter.{% plural %}Based on {{ counter }} independent reporters.{% endblocktranslate %}
+    </p>
+  {% endif %}
+  <p class="verdict__next-step"><strong>{% translate "Next step:" %}</strong> {{ evidence.next_step }}</p>
 </section>
 
 <div class="case-columns">

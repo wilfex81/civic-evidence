@@ -238,4 +238,4 @@ class Observation(models.Model):
         ordering = ["-date_observed", "-created_at"]
 
     def __str__(self):
-        return f"{self.project.name} — {self.date_observed} — {self.status}"
+        return f"{self.project.name} - {self.date_observed} - {self.status}"

@@ -39,7 +39,7 @@ class ObservationForm(forms.ModelForm):
             "submitted_by": forms.TextInput(
                 attrs={
                     "placeholder": gettext_lazy(
-                        "Optional — leave blank to stay anonymous"
+                        "Optional - leave blank to stay anonymous"
                     )
                 }
             ),

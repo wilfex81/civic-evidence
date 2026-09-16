@@ -88,8 +88,25 @@ msgstr "Uliona nini, na mahali gani?"
 msgid "e.g. Photo taken at the site entrance"
 msgstr "mfano: Picha iliyopigwa langoni pa eneo"
 
-msgid "Optional — leave blank to stay anonymous"
-msgstr "Si lazima — acha wazi ili kubaki bila jina"
+msgid "Optional - leave blank to stay anonymous"
+msgstr "Si lazima - acha wazi ili kubaki bila jina"
+
+msgid "Skip to content"
+msgstr "Ruka hadi maudhui"
+
+msgid "For a resident checking whether a promised public project is working in their community."
+msgstr "Kwa mkazi anayekagua ikiwa mradi wa umma ulioahidiwa unafanya kazi katika jamii yake."
+
+msgid "Next step:"
+msgstr "Hatua inayofuata:"
+
+msgid "No account is required. Leave your name blank to submit anonymously. We do not collect device or location data."
+msgstr "Akaunti haihitajiki. Acha jina lako wazi ili kuwasilisha bila kujulikana. Hatukusanyi data ya kifaa au mahali."
+
+msgid "Based on %(counter)s independent reporter."
+msgid_plural "Based on %(counter)s independent reporters."
+msgstr[0] "Kulingana na mwandishi %(counter)s huru."
+msgstr[1] "Kulingana na waandishi %(counter)s huru."
 
 msgid "Completed"
 msgstr "Imekamilika"

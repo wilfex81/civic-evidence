@@ -48,8 +48,8 @@ msgid "e.g. Photo taken at the site entrance"
 msgstr "mfano: Picha iliyopigwa langoni pa eneo"
 
 #: evidence/forms.py:42
-msgid "Optional — leave blank to stay anonymous"
-msgstr "Si lazima — acha wazi ili kubaki bila jina"
+msgid "Optional - leave blank to stay anonymous"
+msgstr "Si lazima - acha wazi ili kubaki bila jina"
 
 #: evidence/models.py:19
 msgid "Completed"
@@ -333,11 +333,11 @@ msgstr "Bado hakuna uchunguzi. Kuwa wa kwanza kuripoti unachokiona ardhini."
 
 #: evidence/templates/evidence/submit_observation.html:15
 msgid ""
-"No account is required. Leave the name field blank to submit anonymously — "
+"No account is required. Leave the name field blank to submit anonymously - "
 "we do not collect device or location data."
 msgstr ""
 "Hakuna akaunti inayohitajika. Acha sehemu ya jina wazi ili kuwasilisha "
-"bila jina — hatukusanyi data ya kifaa au mahali."
+"bila jina - hatukusanyi data ya kifaa au mahali."
 
 #: evidence/templates/evidence/submit_observation.html:29
 msgid "Submit observation"
