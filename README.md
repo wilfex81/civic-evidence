@@ -162,8 +162,7 @@ or editing records during a demo.
 
 ## Demo screenshots / video
 
-_Add a link to the demo video and any screenshots here before
-submission._
+[Watch the Civic Evidence and Verification demo video](Wilfex_Kipchirchir_Civic_Evidence_and_Verification_Demo.mp4)
 
 ## Limitations
 
