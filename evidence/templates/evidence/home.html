@@ -1,11 +1,11 @@
 {% extends "evidence/base.html" %}
+{% load i18n %}
 
 {% block content %}
 <section class="intro">
-  <h1>Find a civic project or public service</h1>
+  <h1>{% translate "Find a civic project or public service" %}</h1>
   <p class="intro__lede">
-    Search {{ total_projects }} record{{ total_projects|pluralize }} to see the official status
-    alongside what the community has reported on the ground.
+    {% blocktranslate count counter=total_projects %}Search {{ counter }} record to see the official status alongside what the community has reported on the ground.{% plural %}Search {{ counter }} records to see the official status alongside what the community has reported on the ground.{% endblocktranslate %}
   </p>
 </section>
 
@@ -15,15 +15,15 @@
     type="text"
     name="q"
     value="{{ query }}"
-    placeholder="Search by project name or location, e.g. Kimumu"
+    placeholder="{% translate 'Search by project name or location, e.g. Kimumu' %}"
   >
   <select class="search__select" name="status">
-    <option value="">All statuses</option>
+    <option value="">{% translate "All statuses" %}</option>
     {% for value, label in status_choices %}
       <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
     {% endfor %}
   </select>
-  <button class="btn btn--primary" type="submit">Search</button>
+  <button class="btn btn--primary" type="submit">{% translate "Search" %}</button>
 </form>
 
 <section class="records">
@@ -38,12 +38,12 @@
         <p class="record-card__summary">{{ card.project.summary }}</p>
         <div class="record-card__bottom">
           <span class="chip chip--status-{{ card.project.official_status }}">{{ card.project.get_official_status_display }}</span>
-          <span class="record-card__link">View record</span>
+          <span class="record-card__link">{% translate "View record" %}</span>
         </div>
       </a>
     {% endfor %}
   {% else %}
-    <p class="empty-state">No records match that search. Try a different name or location.</p>
+    <p class="empty-state">{% translate "No records match that search. Try a different name or location." %}</p>
   {% endif %}
 </section>
 {% endblock %}

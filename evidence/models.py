@@ -2,6 +2,8 @@ from datetime import timedelta
 
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 
 # How many days back an observation still counts as "recent" evidence.
 # Older observations are not ignored, they are shown, but they cannot
@@ -14,15 +16,15 @@ class Project(models.Model):
     civic project or public service."""
 
     class OfficialStatus(models.TextChoices):
-        COMPLETED = "completed", "Completed"
-        ONGOING = "ongoing", "Ongoing"
-        PLANNED = "planned", "Planned"
-        STALLED = "stalled", "Stalled"
+        COMPLETED = "completed", gettext_lazy("Completed")
+        ONGOING = "ongoing", gettext_lazy("Ongoing")
+        PLANNED = "planned", gettext_lazy("Planned")
+        STALLED = "stalled", gettext_lazy("Stalled")
 
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True)
     summary = models.TextField(
-        help_text="One or two sentences describing the project."
+        help_text=gettext_lazy("One or two sentences describing the project.")
     )
     location = models.CharField(max_length=150)
     responsible_organization = models.CharField(max_length=200)
@@ -35,15 +37,19 @@ class Project(models.Model):
     )
     source_name = models.CharField(
         max_length=200,
-        help_text="Where the official claim came from, e.g. a ministry "
-        "report or county gazette notice.",
+        help_text=gettext_lazy(
+            "Where the official claim came from, e.g. a ministry "
+            "report or county gazette notice."
+        ),
     )
     source_url = models.URLField(blank=True)
 
     is_demo_data = models.BooleanField(
         default=True,
-        help_text="Marks records seeded for demonstration rather than "
-        "sourced from a real institution.",
+        help_text=gettext_lazy(
+            "Marks records seeded for demonstration rather than "
+            "sourced from a real institution."
+        ),
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -64,6 +70,17 @@ class Project(models.Model):
     # 4. Recent observations are a mix of  -> "conflicting"
     #    matching and non-matching, or all
     #    non-matching
+    #
+    # Alongside the verdict, two things are surfaced that do not change
+    # the verdict itself but strengthen how much weight it deserves and
+    # what the viewer should do next:
+    #   - reporter_count: how many distinct people contributed the
+    #     recent observations behind the verdict. One person repeating
+    #     a claim is weaker evidence than several independent reports,
+    #     and the UI should not hide that difference.
+    #   - next_step: a plain instruction for what the viewer can do
+    #     with this verdict (submit a report, treat it as settled,
+    #     etc.), so a status is never a dead end.
 
     EXPECTED_OBSERVATION_STATUS = {
         OfficialStatus.COMPLETED: {"operational"},
@@ -78,17 +95,28 @@ class Project(models.Model):
             obs for obs in self.observations.all() if obs.date_observed >= cutoff
         ]
 
+    @staticmethod
+    def _reporter_count(observations):
+        return len({obs.submitted_by for obs in observations})
+
     def evidence_status(self):
-        """Returns a dict with a machine key, a display label, and the
-        recent observations that produced the verdict."""
+        """Returns a dict with a machine key, a display label, a plain
+        next step, and the recent observations that produced the
+        verdict."""
         all_obs = list(self.observations.all())
         if not all_obs:
             return {
                 "key": "no_evidence",
-                "label": "No evidence yet",
-                "detail": "No community observations have been submitted "
-                "for this record.",
+                "label": _("No evidence yet"),
+                "detail": _(
+                    "No community observations have been submitted for "
+                    "this record."
+                ),
+                "next_step": _(
+                    "Be the first to submit an observation for this record."
+                ),
                 "recent": [],
+                "reporter_count": 0,
             }
 
         recent = self.recent_observations()
@@ -96,11 +124,21 @@ class Project(models.Model):
             newest = all_obs[0]
             return {
                 "key": "stale",
-                "label": "No recent evidence",
-                "detail": f"The newest observation is from "
-                f"{newest.date_observed:%B %d, %Y}, outside the "
-                f"{RECENCY_WINDOW_DAYS}-day recency window.",
+                "label": _("No recent evidence"),
+                "detail": _(
+                    "The newest observation is from %(date)s, outside the "
+                    "%(days)s-day recency window."
+                )
+                % {
+                    "date": newest.date_observed.strftime("%B %d, %Y"),
+                    "days": RECENCY_WINDOW_DAYS,
+                },
+                "next_step": _(
+                    "No one has reported on this recently. Submit an "
+                    "observation to bring it up to date."
+                ),
                 "recent": [],
+                "reporter_count": 0,
             }
 
         expected = self.EXPECTED_OBSERVATION_STATUS.get(
@@ -108,28 +146,48 @@ class Project(models.Model):
         )
         matches = [obs for obs in recent if obs.status in expected]
         mismatches = [obs for obs in recent if obs.status not in expected]
+        reporter_count = self._reporter_count(recent)
 
         if mismatches and matches:
             return {
                 "key": "conflicting",
-                "label": "Conflicting evidence",
-                "detail": "Recent observations disagree with each other "
-                "about the current state of this project.",
+                "label": _("Conflicting evidence"),
+                "detail": _(
+                    "Recent observations disagree with each other about "
+                    "the current state of this project."
+                ),
+                "next_step": _(
+                    "Reports disagree. Submit your own observation to "
+                    "help clarify what is currently happening."
+                ),
                 "recent": recent,
+                "reporter_count": reporter_count,
             }
         if mismatches and not matches:
             return {
                 "key": "conflicting",
-                "label": "Conflicting evidence",
-                "detail": "Recent observations do not match the official "
-                "status.",
+                "label": _("Conflicting evidence"),
+                "detail": _(
+                    "Recent observations do not match the official status."
+                ),
+                "next_step": _(
+                    "Reports disagree with the official record. Submit "
+                    "your own observation to help clarify what is "
+                    "currently happening."
+                ),
                 "recent": recent,
+                "reporter_count": reporter_count,
             }
         return {
             "key": "aligned",
-            "label": "Aligned evidence",
-            "detail": "Recent observations match the official status.",
+            "label": _("Aligned evidence"),
+            "detail": _("Recent observations match the official status."),
+            "next_step": _(
+                "Recent reports confirm the official record. No action "
+                "is needed, but you can still add what you see."
+            ),
             "recent": recent,
+            "reporter_count": reporter_count,
         }
 
 
@@ -138,17 +196,17 @@ class Observation(models.Model):
     on the ground, with a stated form of supporting evidence."""
 
     class Status(models.TextChoices):
-        OPERATIONAL = "operational", "Operational"
-        NOT_OPERATIONAL = "not_operational", "Not operational"
-        IN_PROGRESS = "in_progress", "In progress"
-        NO_ACTIVITY = "no_activity", "No activity observed"
-        OTHER = "other", "Other"
+        OPERATIONAL = "operational", gettext_lazy("Operational")
+        NOT_OPERATIONAL = "not_operational", gettext_lazy("Not operational")
+        IN_PROGRESS = "in_progress", gettext_lazy("In progress")
+        NO_ACTIVITY = "no_activity", gettext_lazy("No activity observed")
+        OTHER = "other", gettext_lazy("Other")
 
     class EvidenceType(models.TextChoices):
-        PHOTO = "photo", "Photo"
-        VIDEO = "video", "Video"
-        DOCUMENT = "document", "Document"
-        TESTIMONY = "testimony", "Testimony / eyewitness account"
+        PHOTO = "photo", gettext_lazy("Photo")
+        VIDEO = "video", gettext_lazy("Video")
+        DOCUMENT = "document", gettext_lazy("Document")
+        TESTIMONY = "testimony", gettext_lazy("Testimony / eyewitness account")
 
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="observations"
@@ -156,7 +214,9 @@ class Observation(models.Model):
     date_observed = models.DateField()
     status = models.CharField(max_length=20, choices=Status.choices)
     description = models.TextField(
-        help_text="What was observed, in the reporter's own words."
+        help_text=gettext_lazy(
+            "What was observed, in the reporter's own words."
+        )
     )
     evidence_type = models.CharField(
         max_length=20, choices=EvidenceType.choices
@@ -164,8 +224,10 @@ class Observation(models.Model):
     evidence_note = models.CharField(
         max_length=255,
         blank=True,
-        help_text="A short note on the evidence, e.g. a photo caption "
-        "or where a document can be found.",
+        help_text=gettext_lazy(
+            "A short note on the evidence, e.g. a photo caption "
+            "or where a document can be found."
+        ),
     )
     submitted_by = models.CharField(
         max_length=100, blank=True, default="Anonymous"

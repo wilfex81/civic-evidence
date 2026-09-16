@@ -1,9 +1,10 @@
 {% extends "evidence/base.html" %}
+{% load i18n %}
 
-{% block title %}{{ project.name }} — Civic Evidence &amp; Verification{% endblock %}
+{% block title %}{{ project.name }} — {% translate "Civic Evidence & Verification" %}{% endblock %}
 
 {% block content %}
-<a class="back-link" href="{% url 'home' %}">&larr; All records</a>
+<a class="back-link" href="{% url 'home' %}">&larr; {% translate "All records" %}</a>
 
 <header class="case">
   <h1 class="case__name">{{ project.name }}</h1>
@@ -17,18 +18,18 @@
 
 <div class="case-columns">
   <section class="case-column">
-    <h2 class="case-column__title">Official record</h2>
+    <h2 class="case-column__title">{% translate "Official record" %}</h2>
     <dl class="fact-list">
-      <dt>Status</dt>
+      <dt>{% translate "Status" %}</dt>
       <dd><span class="chip chip--status-{{ project.official_status }}">{{ project.get_official_status_display }}</span></dd>
 
-      <dt>As of</dt>
+      <dt>{% translate "As of" %}</dt>
       <dd>{{ project.official_status_date|date:"F j, Y" }}</dd>
 
-      <dt>Description</dt>
+      <dt>{% translate "Description" %}</dt>
       <dd>{{ project.summary }}</dd>
 
-      <dt>Source</dt>
+      <dt>{% translate "Source" %}</dt>
       <dd>
         {% if project.source_url %}
           <a href="{{ project.source_url }}">{{ project.source_name }}</a>
@@ -38,14 +39,14 @@
       </dd>
     </dl>
     {% if project.is_demo_data %}
-      <p class="demo-note">This record is seeded demonstration data for the proof of concept.</p>
+      <p class="demo-note">{% translate "This record is seeded demonstration data for the proof of concept." %}</p>
     {% endif %}
   </section>
 
   <section class="case-column">
     <div class="case-column__header">
-      <h2 class="case-column__title">Community observations</h2>
-      <a class="btn btn--secondary" href="{% url 'submit_observation' project.slug %}">Submit an observation</a>
+      <h2 class="case-column__title">{% translate "Community observations" %}</h2>
+      <a class="btn btn--secondary" href="{% url 'submit_observation' project.slug %}">{% translate "Submit an observation" %}</a>
     </div>
 
     {% if observations %}
@@ -60,12 +61,12 @@
             <p class="observation__evidence">
               {{ obs.get_evidence_type_display }}{% if obs.evidence_note %} &mdash; {{ obs.evidence_note }}{% endif %}
             </p>
-            <p class="observation__submitter">Submitted by {{ obs.submitted_by }}</p>
+            <p class="observation__submitter">{% blocktranslate with name=obs.submitted_by %}Submitted by {{ name }}{% endblocktranslate %}</p>
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p class="empty-state">No observations yet. Be the first to report what you see on the ground.</p>
+      <p class="empty-state">{% translate "No observations yet. Be the first to report what you see on the ground." %}</p>
     {% endif %}
   </section>
 </div>

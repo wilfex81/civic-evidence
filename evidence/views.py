@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from .forms import ObservationForm
 from .models import Project
@@ -61,7 +62,7 @@ def submit_observation(request, slug):
             if not observation.submitted_by:
                 observation.submitted_by = "Anonymous"
             observation.save()
-            messages.success(request, "Observation submitted.")
+            messages.success(request, _("Observation submitted."))
             return redirect("project_detail", slug=project.slug)
     else:
         form = ObservationForm()

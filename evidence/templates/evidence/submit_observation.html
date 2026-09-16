@@ -1,12 +1,13 @@
 {% extends "evidence/base.html" %}
+{% load i18n %}
 
-{% block title %}Submit an observation — {{ project.name }}{% endblock %}
+{% block title %}{% translate "Submit an observation" %} — {{ project.name }}{% endblock %}
 
 {% block content %}
 <a class="back-link" href="{% url 'project_detail' project.slug %}">&larr; {{ project.name }}</a>
 
 <header class="case">
-  <h1>Submit an observation</h1>
+  <h1>{% translate "Submit an observation" %}</h1>
   <p class="case__meta">{{ project.name }} &middot; {{ project.location }}</p>
 </header>
 
@@ -21,6 +22,6 @@
     </div>
   {% endfor %}
 
-  <button class="btn btn--primary" type="submit">Submit observation</button>
+  <button class="btn btn--primary" type="submit">{% translate "Submit observation" %}</button>
 </form>
 {% endblock %}

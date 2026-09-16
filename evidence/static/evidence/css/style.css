@@ -18,7 +18,7 @@
   --aligned-bg: #E7F0EA;
   --conflicting: #A6432B;
   --conflicting-bg: #F5E7E2;
-  --stale: #7A705A;
+  --stale: #665C48;
   --stale-bg: #EEEAE0;
   --neutral: #4A4436;
   --neutral-bg: #EFECE2;
@@ -55,6 +55,33 @@ select:focus-visible, textarea:focus-visible {
   padding: 0 24px;
 }
 
+/* Accessibility helpers -------------------------------------------*/
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 100;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* Header --------------------------------------------------------- */
 
 .site-header {
@@ -69,6 +96,23 @@ select:focus-visible, textarea:focus-visible {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 6px 20px;
+}
+
+.site-header__side {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.lang-switch select {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
 }
 
 .wordmark {
@@ -135,6 +179,14 @@ select:focus-visible, textarea:focus-visible {
   font-size: 16px;
   margin: 0;
   max-width: 60ch;
+}
+
+.intro__persona {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin: 10px 0 0;
+  max-width: 65ch;
+  font-style: italic;
 }
 
 .search {
@@ -331,6 +383,20 @@ select:focus-visible, textarea:focus-visible {
 
 .verdict__detail { margin: 0; color: var(--ink); }
 
+.verdict__reporters {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.verdict__next-step {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  font-weight: 500;
+}
+
 .case-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -420,6 +486,16 @@ select:focus-visible, textarea:focus-visible {
 }
 
 /* Observation form ------------------------------------------------*/
+
+.privacy-note {
+  max-width: 520px;
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--navy-soft);
+  color: var(--navy);
+  font-size: 13px;
+}
 
 .obs-form {
   max-width: 520px;

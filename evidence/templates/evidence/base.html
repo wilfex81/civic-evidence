@@ -1,10 +1,10 @@
-{% load static %}
+{% load i18n static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Civic Evidence &amp; Verification{% endblock %}</title>
+  <title>{% block title %}{% translate "Civic Evidence & Verification" %}{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,9 +15,20 @@
     <div class="wrap site-header__inner">
       <a class="wordmark" href="{% url 'home' %}">
         <span class="wordmark__mark">CE</span>
-        <span class="wordmark__text">Civic Evidence &amp; Verification</span>
+        <span class="wordmark__text">{% translate "Civic Evidence & Verification" %}</span>
       </a>
-      <p class="site-header__tagline">Know what was claimed. See what is observed.</p>
+      <p class="site-header__tagline">{% translate "Know what was claimed. See what is observed." %}</p>
+      <form method="post" action="{% url 'set_language' %}" class="language-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <label for="language-select">{% translate "Language" %}</label>
+        <select id="language-select" name="language" onchange="this.form.submit()">
+          {% get_available_languages as available_languages %}
+          {% for code, name in available_languages %}
+            <option value="{{ code }}"{% if code == LANGUAGE_CODE %} selected{% endif %}>{{ name }}</option>
+          {% endfor %}
+        </select>
+      </form>
     </div>
   </header>
 
@@ -35,7 +46,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>Proof of concept. Project and observation records shown are demonstration data, not verified government records.</p>
+      <p>{% translate "Proof of concept. Project and observation records shown are demonstration data, not verified government records." %}</p>
     </div>
   </footer>
 </body>

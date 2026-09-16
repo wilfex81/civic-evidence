@@ -1,0 +1,173 @@
+# Swahili translations for Civic Evidence & Verification.
+msgid ""
+msgstr ""
+"Language: sw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Civic Evidence & Verification"
+msgstr "Ushahidi na Uthibitishaji wa Kiraia"
+
+msgid "Know what was claimed. See what is observed."
+msgstr "Fahamu kilichodaiwa. Ona kinachoonekana."
+
+msgid "Language"
+msgstr "Lugha"
+
+msgid "Proof of concept. Project and observation records shown are demonstration data, not verified government records."
+msgstr "Uthibitisho wa dhana. Rekodi za miradi na uchunguzi zinazoonyeshwa ni data ya mfano, si rekodi za serikali zilizothibitishwa."
+
+msgid "Find a civic project or public service"
+msgstr "Tafuta mradi wa kiraia au huduma ya umma"
+
+msgid "Search by project name or location, e.g. Kimumu"
+msgstr "Tafuta kwa jina la mradi au mahali, mfano Kimumu"
+
+msgid "All statuses"
+msgstr "Hali zote"
+
+msgid "Search"
+msgstr "Tafuta"
+
+msgid "View record"
+msgstr "Tazama rekodi"
+
+msgid "No records match that search. Try a different name or location."
+msgstr "Hakuna rekodi zinazolingana na utafutaji huo. Jaribu jina au mahali tofauti."
+
+msgid "All records"
+msgstr "Rekodi zote"
+
+msgid "Official record"
+msgstr "Rekodi rasmi"
+
+msgid "Status"
+msgstr "Hali"
+
+msgid "As of"
+msgstr "Kufikia"
+
+msgid "Description"
+msgstr "Maelezo"
+
+msgid "Source"
+msgstr "Chanzo"
+
+msgid "This record is seeded demonstration data for the proof of concept."
+msgstr "Rekodi hii ni data ya mfano kwa uthibitisho wa dhana."
+
+msgid "Community observations"
+msgstr "Uchunguzi wa jamii"
+
+msgid "Submit an observation"
+msgstr "Wasilisha uchunguzi"
+
+msgid "No observations yet. Be the first to report what you see on the ground."
+msgstr "Bado hakuna uchunguzi. Kuwa wa kwanza kuripoti unachokiona ardhini."
+
+msgid "Submit observation"
+msgstr "Wasilisha uchunguzi"
+
+msgid "Date observed"
+msgstr "Tarehe ya uchunguzi"
+
+msgid "Evidence type"
+msgstr "Aina ya ushahidi"
+
+msgid "Evidence note"
+msgstr "Maelezo ya ushahidi"
+
+msgid "Your name"
+msgstr "Jina lako"
+
+msgid "What did you see, and where?"
+msgstr "Uliona nini, na mahali gani?"
+
+msgid "e.g. Photo taken at the site entrance"
+msgstr "mfano: Picha iliyopigwa langoni pa eneo"
+
+msgid "Optional — leave blank to stay anonymous"
+msgstr "Si lazima — acha wazi ili kubaki bila jina"
+
+msgid "Completed"
+msgstr "Imekamilika"
+
+msgid "Ongoing"
+msgstr "Inaendelea"
+
+msgid "Planned"
+msgstr "Imepangwa"
+
+msgid "Stalled"
+msgstr "Imesimama"
+
+msgid "Operational"
+msgstr "Inafanya kazi"
+
+msgid "Not operational"
+msgstr "Haifanyi kazi"
+
+msgid "In progress"
+msgstr "Ikiendelea"
+
+msgid "No activity observed"
+msgstr "Hakuna shughuli iliyoonekana"
+
+msgid "Other"
+msgstr "Nyingine"
+
+msgid "Photo"
+msgstr "Picha"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "Document"
+msgstr "Hati"
+
+msgid "Testimony / eyewitness account"
+msgstr "Ushuhuda / maelezo ya shahidi"
+
+msgid "No evidence yet"
+msgstr "Bado hakuna ushahidi"
+
+msgid "No community observations have been submitted for this record."
+msgstr "Hakuna uchunguzi wa jamii uliowasilishwa kwa rekodi hii."
+
+msgid "Be the first to submit an observation for this record."
+msgstr "Kuwa wa kwanza kuwasilisha uchunguzi kwa rekodi hii."
+
+msgid "No recent evidence"
+msgstr "Hakuna ushahidi wa hivi karibuni"
+
+msgid "Conflicting evidence"
+msgstr "Ushahidi unaopingana"
+
+msgid "Recent observations disagree with each other about the current state of this project."
+msgstr "Uchunguzi wa hivi karibuni haukubaliani kuhusu hali ya sasa ya mradi huu."
+
+msgid "Recent observations do not match the official status."
+msgstr "Uchunguzi wa hivi karibuni haufanani na hali rasmi."
+
+msgid "Aligned evidence"
+msgstr "Ushahidi unaolingana"
+
+msgid "Recent observations match the official status."
+msgstr "Uchunguzi wa hivi karibuni unafanana na hali rasmi."
+
+msgid "One or two sentences describing the project."
+msgstr "Sentensi moja au mbili zinazoeleza mradi."
+
+msgid "Where the official claim came from, e.g. a ministry report or county gazette notice."
+msgstr "Chanzo cha dai rasmi, kwa mfano ripoti ya wizara au taarifa ya gazeti la kaunti."
+
+msgid "Marks records seeded for demonstration rather than sourced from a real institution."
+msgstr "Inaonyesha rekodi zilizowekwa kwa maonyesho badala ya chanzo kutoka taasisi halisi."
+
+msgid "What was observed, in the reporter's own words."
+msgstr "Kilichozingatiwa, kwa maneno ya mwandishi wa ripoti mwenyewe."
+
+msgid "A short note on the evidence, e.g. a photo caption or where a document can be found."
+msgstr "Maelezo mafupi kuhusu ushahidi, kwa mfano maelezo ya picha au mahali hati inaweza kupatikana."
