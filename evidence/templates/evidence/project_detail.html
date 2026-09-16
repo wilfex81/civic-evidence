@@ -1,0 +1,72 @@
+{% extends "evidence/base.html" %}
+
+{% block title %}{{ project.name }} — Civic Evidence &amp; Verification{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{% url 'home' %}">&larr; All records</a>
+
+<header class="case">
+  <h1 class="case__name">{{ project.name }}</h1>
+  <p class="case__meta">{{ project.location }} &middot; {{ project.responsible_organization }}</p>
+</header>
+
+<section class="verdict verdict--{{ evidence.key }}">
+  <p class="verdict__label">{{ evidence.label }}</p>
+  <p class="verdict__detail">{{ evidence.detail }}</p>
+</section>
+
+<div class="case-columns">
+  <section class="case-column">
+    <h2 class="case-column__title">Official record</h2>
+    <dl class="fact-list">
+      <dt>Status</dt>
+      <dd><span class="chip chip--status-{{ project.official_status }}">{{ project.get_official_status_display }}</span></dd>
+
+      <dt>As of</dt>
+      <dd>{{ project.official_status_date|date:"F j, Y" }}</dd>
+
+      <dt>Description</dt>
+      <dd>{{ project.summary }}</dd>
+
+      <dt>Source</dt>
+      <dd>
+        {% if project.source_url %}
+          <a href="{{ project.source_url }}">{{ project.source_name }}</a>
+        {% else %}
+          {{ project.source_name }}
+        {% endif %}
+      </dd>
+    </dl>
+    {% if project.is_demo_data %}
+      <p class="demo-note">This record is seeded demonstration data for the proof of concept.</p>
+    {% endif %}
+  </section>
+
+  <section class="case-column">
+    <div class="case-column__header">
+      <h2 class="case-column__title">Community observations</h2>
+      <a class="btn btn--secondary" href="{% url 'submit_observation' project.slug %}">Submit an observation</a>
+    </div>
+
+    {% if observations %}
+      <ul class="observation-list">
+        {% for obs in observations %}
+          <li class="observation {% if obs.id in recent_ids %}observation--recent{% endif %}">
+            <div class="observation__top">
+              <span class="chip chip--obs-{{ obs.status }}">{{ obs.get_status_display }}</span>
+              <span class="observation__date">{{ obs.date_observed|date:"F j, Y" }}</span>
+            </div>
+            <p class="observation__description">{{ obs.description }}</p>
+            <p class="observation__evidence">
+              {{ obs.get_evidence_type_display }}{% if obs.evidence_note %} &mdash; {{ obs.evidence_note }}{% endif %}
+            </p>
+            <p class="observation__submitter">Submitted by {{ obs.submitted_by }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty-state">No observations yet. Be the first to report what you see on the ground.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

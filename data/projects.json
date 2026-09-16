@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "kimumu-water-project",
+    "name": "Kimumu Water Project",
+    "summary": "A piped water supply project intended to serve households in Kimumu, Eldoret, including a new borehole and distribution line.",
+    "location": "Kimumu, Eldoret, Uasin Gishu County",
+    "responsible_organization": "Uasin Gishu County Water Department",
+    "official_status": "completed",
+    "official_status_days_ago": 68,
+    "source_name": "Uasin Gishu County project completion notice",
+    "source_url": ""
+  },
+  {
+    "slug": "eldoret-central-market-renovation",
+    "name": "Eldoret Central Market Renovation",
+    "summary": "Renovation of stalls, drainage, and a covered roof section at Eldoret Central Market.",
+    "location": "Eldoret Town, Uasin Gishu County",
+    "responsible_organization": "Eldoret Municipal Board",
+    "official_status": "completed",
+    "official_status_days_ago": 90,
+    "source_name": "Eldoret Municipal Board handover report",
+    "source_url": ""
+  },
+  {
+    "slug": "iten-kaptagat-road-resurfacing",
+    "name": "Iten-Kaptagat Road Resurfacing",
+    "summary": "Resurfacing and drainage works along a stretch of the Iten-Kaptagat road.",
+    "location": "Iten to Kaptagat, Elgeyo-Marakwet / Uasin Gishu border",
+    "responsible_organization": "Kenya Rural Roads Authority (KeRRA)",
+    "official_status": "ongoing",
+    "official_status_days_ago": 150,
+    "source_name": "KeRRA regional works update",
+    "source_url": ""
+  },
+  {
+    "slug": "uasin-gishu-youth-innovation-hub",
+    "name": "Uasin Gishu Youth Innovation Hub",
+    "summary": "A planned co-working and digital skills center for young entrepreneurs in Uasin Gishu County.",
+    "location": "Eldoret Town, Uasin Gishu County",
+    "responsible_organization": "Uasin Gishu County ICT Directorate",
+    "official_status": "planned",
+    "official_status_days_ago": 20,
+    "source_name": "Uasin Gishu County budget and planning brief",
+    "source_url": ""
+  }
+]

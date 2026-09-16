@@ -1,0 +1,49 @@
+{% extends "evidence/base.html" %}
+
+{% block content %}
+<section class="intro">
+  <h1>Find a civic project or public service</h1>
+  <p class="intro__lede">
+    Search {{ total_projects }} record{{ total_projects|pluralize }} to see the official status
+    alongside what the community has reported on the ground.
+  </p>
+</section>
+
+<form class="search" method="get" action="{% url 'home' %}">
+  <input
+    class="search__input"
+    type="text"
+    name="q"
+    value="{{ query }}"
+    placeholder="Search by project name or location, e.g. Kimumu"
+  >
+  <select class="search__select" name="status">
+    <option value="">All statuses</option>
+    {% for value, label in status_choices %}
+      <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn--primary" type="submit">Search</button>
+</form>
+
+<section class="records">
+  {% if project_cards %}
+    {% for card in project_cards %}
+      <a class="record-card" href="{% url 'project_detail' card.project.slug %}">
+        <div class="record-card__top">
+          <h2 class="record-card__name">{{ card.project.name }}</h2>
+          <span class="chip chip--evidence-{{ card.evidence.key }}">{{ card.evidence.label }}</span>
+        </div>
+        <p class="record-card__meta">{{ card.project.location }} &middot; {{ card.project.responsible_organization }}</p>
+        <p class="record-card__summary">{{ card.project.summary }}</p>
+        <div class="record-card__bottom">
+          <span class="chip chip--status-{{ card.project.official_status }}">{{ card.project.get_official_status_display }}</span>
+          <span class="record-card__link">View record</span>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <p class="empty-state">No records match that search. Try a different name or location.</p>
+  {% endif %}
+</section>
+{% endblock %}

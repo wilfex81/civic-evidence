@@ -1,0 +1,65 @@
+[
+  {
+    "project_slug": "kimumu-water-project",
+    "date_observed_days_ago": 6,
+    "status": "operational",
+    "description": "Water was flowing at the main tap point near the primary school. Several households were filling jerricans.",
+    "evidence_type": "photo",
+    "evidence_note": "Photo taken at the Kimumu tap point",
+    "submitted_by": "Resident, Kimumu"
+  },
+  {
+    "project_slug": "kimumu-water-project",
+    "date_observed_days_ago": 3,
+    "status": "not_operational",
+    "description": "No water at the tap point for the second day. Neighbors said the pump has not been running since the weekend.",
+    "evidence_type": "photo",
+    "evidence_note": "Photo of dry tap, timestamp visible",
+    "submitted_by": "Resident, Kimumu"
+  },
+  {
+    "project_slug": "kimumu-water-project",
+    "date_observed_days_ago": 1,
+    "status": "operational",
+    "description": "Water is back. Pressure is lower than the first day but the tap is running.",
+    "evidence_type": "photo",
+    "evidence_note": "Photo taken at the same tap point",
+    "submitted_by": "Anonymous"
+  },
+  {
+    "project_slug": "eldoret-central-market-renovation",
+    "date_observed_days_ago": 12,
+    "status": "operational",
+    "description": "New stalls are in use and the roof section keeps traders dry. Drainage channel is clear.",
+    "evidence_type": "photo",
+    "evidence_note": "Photo of the covered stall section",
+    "submitted_by": "Trader, Eldoret Central Market"
+  },
+  {
+    "project_slug": "eldoret-central-market-renovation",
+    "date_observed_days_ago": 4,
+    "status": "operational",
+    "description": "Market is busy, stalls fully occupied, no visible flooding after yesterday's rain.",
+    "evidence_type": "testimony",
+    "evidence_note": "",
+    "submitted_by": "Anonymous"
+  },
+  {
+    "project_slug": "iten-kaptagat-road-resurfacing",
+    "date_observed_days_ago": 95,
+    "status": "in_progress",
+    "description": "Grading equipment was on site near the Kaptagat forest turn-off. Roughly a third of the stretch had fresh gravel.",
+    "evidence_type": "photo",
+    "evidence_note": "Photo of grading equipment on site",
+    "submitted_by": "Boda rider, Kaptagat route"
+  },
+  {
+    "project_slug": "iten-kaptagat-road-resurfacing",
+    "date_observed_days_ago": 140,
+    "status": "no_activity",
+    "description": "No workers or equipment visible along the route.",
+    "evidence_type": "testimony",
+    "evidence_note": "",
+    "submitted_by": "Anonymous"
+  }
+]
