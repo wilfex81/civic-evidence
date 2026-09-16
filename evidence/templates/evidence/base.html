@@ -18,17 +18,18 @@
         <span class="wordmark__text">{% translate "Civic Evidence & Verification" %}</span>
       </a>
       <p class="site-header__tagline">{% translate "Know what was claimed. See what is observed." %}</p>
-      <form method="post" action="{% url 'set_language' %}" class="language-form">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <label for="language-select">{% translate "Language" %}</label>
-        <select id="language-select" name="language" onchange="this.form.submit()">
-          {% get_available_languages as available_languages %}
-          {% for code, name in available_languages %}
-            <option value="{{ code }}"{% if code == LANGUAGE_CODE %} selected{% endif %}>{{ name }}</option>
-          {% endfor %}
-        </select>
-      </form>
+      <nav class="language-form" aria-label="{% translate 'Language' %}">
+        <span>{% translate "Language" %}</span>
+        {% get_available_languages as available_languages %}
+        {% for code, name in available_languages %}
+          <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+            <input type="hidden" name="language" value="{{ code }}">
+            <input type="hidden" name="next" value="{% if code == 'en' %}/en/{% else %}/sw/{% endif %}">
+            <button type="submit"{% if code == LANGUAGE_CODE %} aria-current="true"{% endif %}>{{ name }}</button>
+          </form>
+        {% endfor %}
+      </nav>
     </div>
   </header>
 
