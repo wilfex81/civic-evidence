@@ -30,6 +30,12 @@ around civic projects and public services:
 The system does not decide what is true. It makes the available
 evidence, and any disagreement in it, visible.
 
+The evidence model keeps three layers distinct: the official record, the
+community observation, and the supporting evidence associated with that
+observation. This separation helps users inspect where information came from
+without presenting a community report as an official fact or an official
+claim as proof of current conditions.
+
 The primary user is a resident checking whether a promised public project
 is working in their community. Journalists and watchdog groups can use the
 same record to compare official claims with recent, attributable reports.
@@ -86,6 +92,25 @@ example an official status of *completed* expects an *operational*
 observation, *planned* expects *no activity observed*. There is no
 model or scoring involved. An LLM is not used to decide, or influence,
 the verdict.
+
+## Information sources
+
+Official records retain the stated source, status, date, location, and
+responsible organization. Community observations retain their observation
+date, reported status, description, reporter name or anonymous submission,
+and typed evidence note. Conflicting observations remain visible rather than
+being silently resolved. This makes the origin and limits of each claim clear
+to the person reviewing it.
+
+## Scalability
+
+The data model is geography-agnostic. Projects and observations use generic
+fields, so extending the demonstration from Kenya to another country or
+region requires new data rather than a schema rewrite. The interface already
+supports additional languages through Django translation files, and
+demonstration records are loaded from structured JSON through one management
+command. The evidence-status rule is also independent of a specific project
+type and can be extended through its official-status-to-observation mapping.
 
 ## Architecture
 
@@ -160,9 +185,14 @@ An admin interface is available at `/admin/` after creating a
 superuser (`python manage.py createsuperuser`), useful for inspecting
 or editing records during a demo.
 
-## Demo screenshots / video
+## Demo video
 
-[Watch the Civic Evidence and Verification demo video](Wilfex_Kipchirchir_Civic_Evidence_and_Verification_Demo.mp4)
+[Watch the Civic Evidence and Verification demo video](docs/Wilfex_Kipchirchir_Civic_Evidence_and_Verification_Demo.mp4)
+
+## Submission documents
+
+- [Written summary](docs/Wilfex_Kipchirchir_Civic_Evidence_Verification_Written_Summary.pdf)
+- [Pitch deck](docs/Wilfex_Kipchirchir_Civic_Evidence_Verification_Pitch_Deck.pdf)
 
 ## Limitations
 
@@ -197,3 +227,10 @@ project. AI-assisted development tools were used for coding support,
 debugging, documentation, and iteration. The proof of concept does not use
 an LLM as a source of truth or as the decision-maker for the evidence verdict
 - that logic is explicit, fixed, and inspectable in `evidence/models.py`.
+
+The author specified the core idea, three-layer evidence model, and
+verification logic before implementation. AI tools assisted with repetitive
+implementation work, but each feature was manually reviewed and tested end to
+end before acceptance. See the [written summary](docs/Wilfex_Kipchirchir_Civic_Evidence_Verification_Written_Summary.pdf)
+for the fuller explanation of the problem, design decisions, implementation,
+and originality statement.
